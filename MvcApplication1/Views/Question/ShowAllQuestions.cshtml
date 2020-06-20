@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "ShowAllQuestions";
+}
+
+@model MvcApplication1.Models.ViewModel
+
+<h2>ShowAllQuestions</h2>
+
+
+<script src="~/Scripts/jquery-1.8.2.js"></script>
+
+
+<script>
+
+    var contactList;
+    var QuestioList;
+    $(function () {
+        debugger;
+        contactList = JSON.parse(@Html.Raw(@Model.ContactList));
+        QuestioList = JSON.parse(@Html.Raw(@Model.QuestionList));
+
+        var newRowContent = "";
+        for (i = 0 ; i <= QuestioList.length - 1; i++) {
+            var contact = "";
+            for (j = 0; j <= contactList.length - 1; j++) {
+                if (contactList[j] == QuestioList.ContactId) { contact = contactList[j].name }
+            }
+
+            newRowContent += '<tr><td>' + parseInt(i) + parseInt(1) + '</td> <td>'+contact +'</td> <td> ' + QuestioList.Desc + ' </td>   </tr>'
+        }
+
+
+
+        $("#QuestionDetails tbody").append(newRowContent);
+
+
+    })
+</script>
+
+
+<table>
+    <thead id="QuestionDetails">
+        <tr>
+            <td>S.No</td>
+            <td>Contact</td>
+            <td>Question Desc</td>
+        </tr>
+
+    </thead>
+
+    <tbody></tbody>
+</table>
